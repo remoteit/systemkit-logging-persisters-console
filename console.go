@@ -8,46 +8,14 @@ import (
 )
 
 type consoleLogger struct {
-	logUntil logging.LogType
-	colors   map[logging.LogType]ConsoleLoggerColorDelegate
+	colors map[logging.LogType]ConsoleLoggerColorDelegate
 }
 
 // NewConsoleLogger -
-func NewConsoleLogger(logUntil logging.LogType, colors map[logging.LogType]ConsoleLoggerColorDelegate) logging.Logger {
+func NewConsoleLogger(colors map[logging.LogType]ConsoleLoggerColorDelegate) logging.Logger {
 	return &consoleLogger{
-		logUntil: logUntil,
-		colors:   colors,
+		colors: colors,
 	}
-}
-
-// NewConsoleLoggerDefaultColors -
-func NewConsoleLoggerDefaultColors() map[logging.LogType]ConsoleLoggerColorDelegate {
-	return map[logging.LogType]ConsoleLoggerColorDelegate{
-		logging.TypeDisable: WhiteString,
-		logging.TypeTrace:   BlackStringYellowBG,
-		logging.TypePanic:   RedString,
-		logging.TypeFatal:   RedString,
-		logging.TypeError:   RedString,
-		logging.TypeWarning: YellowString,
-		logging.TypeInfo:    WhiteString,
-		logging.TypeSuccess: GreenString,
-		logging.TypeDebug:   CyanString,
-	}
-}
-
-// ConsoleLoggerColorDelegate -
-type ConsoleLoggerColorDelegate func(string, ...interface{}) string
-
-// BlackStringYellowBG -
-func BlackStringYellowBG(format string, a ...interface{}) string {
-	c := New(FgBlack, BgYellow)
-	return c.Sprintf(format, a...)
-}
-
-// BlackStringWhiteBG -
-func BlackStringWhiteBG(format string, a ...interface{}) string {
-	c := New(FgBlack, BgWhite)
-	return c.Sprintf(format, a...)
 }
 
 func (thisRef consoleLogger) Log(logEntry logging.LogEntry) logging.LogEntry {
