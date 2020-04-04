@@ -35,13 +35,21 @@ func NewDefaultColors() map[logging.LogType]ConsoleLoggerColorDelegate {
 }
 
 // NewConsoleLoggerCustomColors -
-func NewConsoleLoggerCustomColors(colors map[logging.LogType]ConsoleLoggerColorDelegate) logging.LoggerImplementation {
-	return logging.NewDefaultLoggerImplementation(
-		NewConsoleLogger(colors),
-	)
+func NewConsoleLoggerCustomColors(colors map[logging.LogType]ConsoleLoggerColorDelegate) logging.Logger {
+	return NewConsoleLogger(colors)
 }
 
 // NewConsoleLoggerDefaultColors -
-func NewConsoleLoggerDefaultColors() logging.LoggerImplementation {
+func NewConsoleLoggerDefaultColors() logging.Logger {
 	return NewConsoleLoggerCustomColors(NewDefaultColors())
+}
+
+// NewConsoleLoggerCustomColorsEasy -
+func NewConsoleLoggerCustomColorsEasy(colors map[logging.LogType]ConsoleLoggerColorDelegate) logging.LoggerImplementation {
+	return logging.NewDefaultLoggerImplementation(NewConsoleLoggerCustomColors(colors))
+}
+
+// NewConsoleLoggerDefaultColorsEasy -
+func NewConsoleLoggerDefaultColorsEasy() logging.LoggerImplementation {
+	return NewConsoleLoggerCustomColorsEasy(NewDefaultColors())
 }
