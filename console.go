@@ -1,10 +1,9 @@
 package persisters
 
 import (
-	"log"
+	"fmt"
 
 	logging "github.com/codemodify/systemkit-logging"
-	"github.com/mattn/go-colorable"
 )
 
 type consoleLogger struct{}
@@ -15,10 +14,7 @@ func NewConsoleLogger() logging.CoreLogger {
 }
 
 func (thisRef consoleLogger) Log(logEntry logging.LogEntry) logging.LogEntry {
-	log.SetOutput(colorable.NewColorableStdout()) // or NewColorableStderr()
-	log.SetFlags(0)
-
-	log.Println(logEntry.Message)
+	fmt.Println(logEntry.Message)
 
 	return logEntry
 }
