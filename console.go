@@ -3,7 +3,7 @@ package persisters
 import (
 	"fmt"
 
-	logging "github.com/codemodify/systemkit-logging"
+	logging "github.com/remoteit/systemkit-logging"
 )
 
 type consoleLogger struct{}
